@@ -18,8 +18,6 @@ The migration process will proceed in a few steps:
 1. Preparing environment for working with multiplatform
     1. Migrating from kapt to KSP
     2. Making Room multiplatform
-
-[//]: # (   3. Making Navigation multiplatform)
 2. Creating Compose Multiplatform template
     1. Setting up dependencies
     2. Creating new source sets
