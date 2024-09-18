@@ -36,7 +36,8 @@ The migration process will proceed in a few steps:
 ## 1.Preparing environment for working with multiplatform
 ### 1.1 Migrating from kapt to KSP
 To make Room able to work on both platforms we need ksp to be integrated in our project. To read more about setting up KSP, visit [official site](https://kotlinlang.org/docs/ksp-quickstart.html#create-a-processor-of-your-own)
-> [!IMPORTANT] When working with Kotlin 1.9.*, setup process differs a little from version 2.0.0 +. Changes described in the link above
+> [!WARNING]
+> When working with Kotlin 1.9.*, setup process differs a little from version 2.0.0 +. Changes described in the link above
 
 1. In `libs.versions.toml` add KSP plugin dependency and make sure that ksp version complies with Kotlin version
    ```toml
@@ -274,13 +275,17 @@ To make our app multiplatform, we need to change a bit the dependecies and proje
 7. Sync the project
 
 ### 2.2. Creating new source sets
-With all changes made, our app module should look like this ![img](img.png)
+With all changes made, our app module should look like this 
+
+![image](https://github.com/user-attachments/assets/a5475d75-db94-4f61-8d4b-9b463e4d34a2)
+
 
 Now, when we defined all our source sets we need to create appropriate folders. Android Studio can help with this. You just need to right-click on src folder in app module and then click `new` -> `directory`
 
 If everything was configured correctly, You will see the following:
 
-![img_1.png](img_1.png)
+![image](https://github.com/user-attachments/assets/0e2a3d9c-125a-4011-b567-275476dfa7a3)
+
 
 We need these directories:
 - `AndroidMain` ( kotlin & resources directories )
@@ -289,7 +294,8 @@ We need these directories:
 
 When all directories created, your app module structure should look like this
 
-![img_2.png](img_2.png)
+![image](https://github.com/user-attachments/assets/185014b0-78ed-4651-8047-6f4a2ca70a9f)
+
 
 ### 2.3. Replacing resources
 
