@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.standalone.migrationwithcompose.LoginScreen
 import com.standalone.migrationwithcompose.MainScreen
 import com.standalone.migrationwithcompose.MainScreenViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 private const val LOGIN_SCREEN_ROUTE = "login"
 private const val MAIN_SCREEN_ROUTE = "main_screen"
@@ -26,8 +27,11 @@ fun AppNavHost() {
         }
 
         composable(route = MAIN_SCREEN_ROUTE) {
-            val viewModel: MainScreenViewModel = viewModel()
-            MainScreen(viewModel.items.value)
+            val viewModel = koinViewModel<MainScreenViewModel>()
+            MainScreen(
+                list = viewModel.items.value,
+                onNavigateBack = { navHostController.navigateUp() }
+                )
         }
 
     }

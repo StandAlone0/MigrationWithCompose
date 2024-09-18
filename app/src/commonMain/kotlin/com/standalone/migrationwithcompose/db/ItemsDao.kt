@@ -8,8 +8,8 @@ import androidx.room.Upsert
 interface ItemsDao {
 
     @Query("SELECT * FROM items")
-    fun getItems(): List<Item>
+    suspend fun getItems(): List<Item>
 
     @Upsert
-    fun upsertItems(list: List<Item>)
+    suspend fun upsertItems(list: List<Item>)
 }

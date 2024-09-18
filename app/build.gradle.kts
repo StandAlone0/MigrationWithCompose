@@ -1,29 +1,29 @@
 plugins {
     alias(libs.plugins.android.application)
-//    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
-//    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
 
-    setOf(
+    listOf(
         iosX64(),
-        iosSimulatorArm64(),
-        iosArm64()
+        iosArm64(),
+        iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            binaryOption("bundleId", "com.standalone.Compose")
+            baseName = "Shared"
             isStatic = false
         }
     }
@@ -32,11 +32,13 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -46,6 +48,11 @@ kotlin {
 
 //            implementation(libs.androidx.lifecycle.viewmodel)
 //            implementation(libs.androidx.lifecycle.runtime.compose)
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite.bundled)
@@ -84,16 +91,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     buildFeatures {
         compose = true
     }
-    composeOptions{
-        kotlinCompilerExtensionVersion = "1.5.13"
-    }
+    composeCompiler {}
 
     packaging {
         resources {
@@ -116,7 +121,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5")
     implementation("androidx.navigation:navigation-compose:2.8.0")
 
-//    implementation("androidx.room:room-ktx::2.6.1")
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -133,6 +139,7 @@ room {
 
 dependencies {
     ksp(libs.androidx.room.compiler)
+
 }
 
 task("testClasses")

@@ -1,6 +1,6 @@
 [versions]
 agp = "8.4.1"
-kotlin = "1.9.23"
+kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -8,10 +8,11 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2023.08.00"
-compose-plugin = "1.6.10"
+compose-plugin = "1.7.0-beta02"
+koin-bom = "4.0.0-RC2"
 
 
-ksp = "1.9.23-1.0.19"
+ksp = "2.0.20-1.0.25"
 androidx-room = "2.7.0-alpha07"
 androidx-sqlite = "2.5.0-alpha07"
 
@@ -36,8 +37,16 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room"}
 androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqlite"}
 
+#Koin
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom"  }
+koin-core = { module = "io.insert-koin:koin-core"  }
+koin-compose = { group = "io.insert-koin", name = "koin-compose" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }
+koin-android = { group = "io.insert-koin", name = "koin-android" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 #ComposeMultiplatform

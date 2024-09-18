@@ -1,20 +1,21 @@
 package com.standalone.migrationwithcompose
 
-import android.util.Log
+//import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.standalone.migrationwithcompose.db.AppDatabase
 import com.standalone.migrationwithcompose.db.Item
-import com.standalone.migrationwithcompose.di.ComposeApplication
+//import com.standalone.migrationwithcompose.di.ComposeApplication
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainScreenViewModel(
-    database: AppDatabase = ComposeApplication.container!!.database
+    database: AppDatabase
 ): ViewModel() {
 
     var items: MutableState<List<Item>> = mutableStateOf(listOf())
@@ -25,7 +26,6 @@ class MainScreenViewModel(
 
     init {
         scope.launch(Dispatchers.IO) {
-            Log.d("From VM", "viewModel items: ${items.value}")
             var items = dao.getItems()
             if (items.isEmpty()) {
                 val dtoItems = simulateNetworkCall()
@@ -33,7 +33,6 @@ class MainScreenViewModel(
                 items = dao.getItems()
             }
             this@MainScreenViewModel.items.value = items
-            Log.d("From VM", "viewModel items: ${this@MainScreenViewModel.items.value}")
         }
     }
 
