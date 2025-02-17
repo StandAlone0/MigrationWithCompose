@@ -16,7 +16,7 @@ Following this guide assumes that you Android app meets some requirements:
 The migration process will proceed in a few steps:
 
 1. Preparing environment for working with multiplatform
-    1. Migrating from kapt to KSP
+    1. [Migrating from kapt to KSP](###Migrating-from-kapt-to-KSP)
     2. Making Room multiplatform
 2. Creating Compose Multiplatform template
     1. Setting up dependencies
